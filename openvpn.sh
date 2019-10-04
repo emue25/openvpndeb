@@ -76,9 +76,9 @@ screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 function webmin () {
 apt-get install perl libnet-ssleay-perl openssl libauthen-pam-perl libpam-runtime libio-pty-perl apt-show-versions python -y
 apt-get install libxml-parser-perl libexpat1-dev -y -f
-wget 'http://prdownloads.sourceforge.net/webadmin/webmin_1.910_all.deb'
-dpkg --install webmin_1.910_all.deb
-rm -rf webmin_1.910_all.deb
+wget 'http://prdownloads.sourceforge.net/webadmin/webmin_1.930_all.deb'
+dpkg --install webmin_1.930_all.deb
+rm -rf webmin_1.930_all.deb
 }
 
 function dropssl () {
@@ -355,7 +355,7 @@ function installQuestions () {
 	fi
 	echo ""
 	echo 'Your IP is '"$IP" '.. What port do you want OpenVPN to listen to?'
-	echo "   1) Default: 465"
+	echo "   1) Default: 55"
 	echo "   2) Custom"
 	echo "   3) Random [49152-65535]"
 	until [[ "$PORT_CHOICE" =~ ^[1-3]$ ]]; do
@@ -363,11 +363,11 @@ function installQuestions () {
 	done
 	case $PORT_CHOICE in
 		1)
-			PORT="465"
+			PORT="55"
 		;;
 		2)
 			until [[ "$PORT" =~ ^[0-9]+$ ]] && [ "$PORT" -ge 1 ] && [ "$PORT" -le 65535 ]; do
-				read -rp "Custom port [1-65535]: " -e -i 465 PORT
+				read -rp "Custom port [1-65535]: " -e -i 55 PORT
 			done
 		;;
 		3)
@@ -394,7 +394,7 @@ function installQuestions () {
 	esac
 	echo ""
 	echo "What Privoxy port do you want?"
-	echo "   1) Default: 8118"
+	echo "   1) Default: 8080"
 	echo "   2) Custom"
 	echo "   3) Random [49152-65535]"
 	until [[ "$PORT_PRIVO" =~ ^[1-3]$ ]]; do
@@ -402,11 +402,11 @@ function installQuestions () {
 	done
 	case $PORT_PRIVO in
 		1)
-			PORTS="8118"
+			PORTS="8080"
 		;;
 		2)
 			until [[ "$PORTS" =~ ^[0-9]+$ ]] && [ "$PORTS" -ge 1 ] && [ "$PORTS" -le 65535 ]; do
-				read -rp "Custom port [1-65535]: " -e -i 8118 PORTS
+				read -rp "Custom port [1-65535]: " -e -i 8080 PORTS
 			done
 		;;
 		3)
